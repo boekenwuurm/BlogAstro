@@ -8,6 +8,8 @@ const posts = await getPosts();
 ---
 
 <WordPressLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <p>Welkom!</p>
+  <p>Dit is de plek waar ik projecten en writings deel</p>
   <div class="posts-grid">
     {
       posts.map((post) => {
@@ -57,6 +59,7 @@ const posts = await getPosts();
     }
   </div>
 </WordPressLayout>
+
 
 <style>
   .posts-grid {

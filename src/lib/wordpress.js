@@ -1,6 +1,6 @@
 import { decodeHtmlEntities } from './htmlDecode';
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+//process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 const WORDPRESS_API_URL = 'https://wp.boekenwuurm.nl/wp-json/wp/v2';
 
