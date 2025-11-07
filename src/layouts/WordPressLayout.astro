@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Sidebar from '../components/Sidebar.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -12,16 +13,60 @@ interface Props {
 const { title, description = '' } = Astro.props;
 ---
 
+
 <!doctype html>
 <html lang="nl">
   <head>
     <BaseHead title={title} description={description} />
   </head>
   <body>
-    <Header />
-    <main>
-      <slot />
-    </main>
-    <Footer />
+    <div class="app-shell">
+      <Sidebar />
+
+      <div class="content-area">
+        <Header />
+        <main class="page-main">
+          <slot />
+        </main>
+        <Footer />
+      </div>
+    </div>
+
+    <style>
+      /* layout: sidebar + content side-by-side */
+      .app-shell {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        max-width: 100%;
+
+      }
+
+      /* ensure sidebar keeps a fixed width and stays in flow */
+      .site-sidebar {
+        flex: 0 0 260px;
+        min-height: 100vh;
+        position: sticky;
+        top: 0;
+        margin: 0; /* override per-component margin so it doesn't push content below */
+      }
+
+      /* content grows and can shrink correctly */
+      .content-area {
+        flex: 1 1 0;
+        min-width: 0; /* prevents overflow with long children */
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page-main {
+        width: 100%;
+      }
+
+      /* mobile: stack and hide sidebar (Sidebar component already hides on small screens) */
+      @media (max-width: 900px) {
+        .app-shell { display: block; padding: 0.5rem; }
+      }
+    </style>
   </body>
 </html>
